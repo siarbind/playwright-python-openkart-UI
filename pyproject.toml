@@ -1,0 +1,7 @@
+[project]
+name = "opencart-ui-automation"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "playwright>=1.61.0",
+]
