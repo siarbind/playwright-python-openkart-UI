@@ -30,3 +30,9 @@ jobs:
 
       - name: Run tests
         run: python -m pytest
+
+      - name: Generate Allure Report
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: reports/allure-results
