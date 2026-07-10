@@ -7,7 +7,6 @@ pytest-rerunfailures
 openpyxl
 Faker
 python-slugify
-pytest-playwright
 
 #pytest==8.3.2
 #playwright==1.48.0
