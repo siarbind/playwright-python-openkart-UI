@@ -58,9 +58,9 @@ jobs:
           publish_dir: allure-history
 
       - name: Send Results to n8n
+        if: always()
         run: |
-          curl.exe
-          -X POST \
-          -H "Content-Type: application/json" \
-          --data @playwright-report/results.json \
-          https://straining-unsliced-creed.ngrok-free.dev/webhook-test/playwright-report
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            --data @playwright-reports \
+            https://straining-unsliced-creed.ngrok-free.dev/webhook-test/playwright-report

@@ -58,4 +58,13 @@ def test_user_registration(page):
     registration_page.click_continue()
 
     confirmation_msg=registration_page.get_confirmation_msg()
-    expect(confirmation_msg).to_have_text("Your Account Has Been Created!")
+    error_message = page.locator(".alert-danger")
+
+    if error_message.is_visible():
+        pytest.fail(
+            f"Registration failed: {error_message.text_content()}"
+        )
+
+    expect(confirmation_msg).to_have_text(
+        "Your Account Has Been Created!"
+    )

@@ -1,6 +1,7 @@
 from faker import Faker
 import random
 import string
+import uuid
 
 
 class RandomDataUtil:
@@ -16,8 +17,11 @@ class RandomDataUtil:
     def get_full_name(self) -> str:
         return self.faker.name()
 
-    def get_email(self) -> str:
-        return self.faker.email()
+    # def get_email(self) -> str:
+    #     return self.faker.email()
+
+    def get_email(self) ->str:
+        return f"test_{uuid.uuid4().hex[:8]}@gmail.com"
 
     def get_phone_number(self) -> str:
         return self.faker.phone_number()
