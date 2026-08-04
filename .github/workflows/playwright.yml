@@ -31,7 +31,16 @@ jobs:
           python -m pytest --version
 
       - name: Run tests
+#        run: python -m pytest --junitxml=reports/junit.xml
         run: python -m pytest
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-reports
+          path: reports/
+          retention-days: 7
 
       - name: Generate Allure Report
         if: always()
@@ -47,3 +56,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-history
+
+      - name: Send Results to n8n
+        run: |
+          curl.exe
+          -X POST \
+          -H "Content-Type: application/json" \
+          --data @playwright-report/results.json \
+          https://straining-unsliced-creed.ngrok-free.dev/webhook-test/playwright-report
