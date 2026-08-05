@@ -42,6 +42,15 @@ jobs:
           path: reports/
           retention-days: 7
 
+      - name: Notify n8n
+        run: |
+          curl -X POST \
+            https://straining-unsliced-creed.ngrok-free.dev/webhook-test/playwright-report \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repository":"${{ github.repository }}",
+              "run_id":"${{ github.run_id }}"
+            }'
       - name: Generate Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master
